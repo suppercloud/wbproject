@@ -1,7 +1,7 @@
 function guessfilenum {
     local real_num=$(ls -l | grep "^-" | wc -l)
-    
-    while true
+    local isright=false
+    while [[ $isright -eq false ]]
     do
 	echo "How many files are in the current directory?"
         read guess_num
@@ -12,10 +12,11 @@ function guessfilenum {
 	then
 	    echo "It's too low.Try again!"
 	else
-	    echo "Congratulations!You are right!"
-	    break
+	    let isright=!$isright
 	fi
     done
+
+    echo "Congratulations!You are right!"
 }
 
 guessfilenum
